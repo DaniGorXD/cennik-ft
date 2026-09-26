@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Bobek Customs — Cennik FiveM</title>
+<style>
+:root{--bg:#070b14;--panel:#0e1627;--panel2:#121d32;--text:#f4f7fb;--muted:#8ea0bd;--accent:#4c8dff;--accent2:#7c4dff;--line:#22304a;--good:#45d483}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:radial-gradient(1000px 600px at 20% -10%,#173263 0,transparent 55%),radial-gradient(900px 500px at 100% 0,#261d57 0,transparent 50%),var(--bg);color:var(--text);min-height:100vh}
+.wrap{max-width:1240px;margin:auto;padding:34px 20px 70px}
+.toolbar{display:grid;grid-template-columns:1fr 190px;gap:12px;margin:22px 0}.search,.select{width:100%;border:1px solid var(--line);background:#0b1322;color:var(--text);border-radius:14px;padding:15px 16px;outline:none;font-size:15px}.search:focus,.select:focus{border-color:var(--accent);box-shadow:0 0 0 3px #4c8dff22}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}.stat{background:#0d1626;border:1px solid var(--line);border-radius:12px;padding:9px 12px;color:var(--muted);font-size:13px}.stat b{color:var(--text)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{background:linear-gradient(180deg,#101a2d,#0b1322);border:1px solid var(--line);border-radius:18px;padding:17px;cursor:pointer;transition:.18s transform,.18s border-color,.18s box-shadow}.card:hover{transform:translateY(-2px);border-color:#45679c;box-shadow:0 12px 30px #0005}.name{font-weight:800;font-size:18px}.sub{color:var(--muted);font-size:12px;margin-top:4px}.price{font-size:25px;font-weight:900;margin-top:16px;letter-spacing:-.5px}.price small{font-size:12px;color:var(--muted);font-weight:600}.arrow{float:right;color:var(--accent)}
+.empty{display:none;text-align:center;color:var(--muted);padding:60px 0}.modal{position:fixed;inset:0;background:#02050bd9;backdrop-filter:blur(9px);display:none;align-items:center;justify-content:center;padding:20px;z-index:10}.modal.on{display:flex}.box{width:min(760px,100%);max-height:92vh;overflow:auto;background:#0b1322;border:1px solid #2a3b5b;border-radius:22px;box-shadow:0 30px 100px #000a}.boxhead{padding:22px 22px 16px;display:flex;justify-content:space-between;gap:20px;position:sticky;top:0;background:#0b1322f2;backdrop-filter:blur(10px);z-index:2;border-bottom:1px solid var(--line)}.boxhead h2{margin:0;font-size:27px}.close{border:0;background:#17233a;color:white;width:38px;height:38px;border-radius:12px;font-size:22px;cursor:pointer}.content{padding:18px 22px 24px}.full{background:linear-gradient(120deg,#153a75,#382a80);border:1px solid #4d70c8;border-radius:17px;padding:17px;margin-bottom:16px}.full span{display:block;color:#c7d6f0;font-size:12px;text-transform:uppercase;letter-spacing:1px}.full strong{font-size:30px}.parts{display:grid;grid-template-columns:1fr 1fr;gap:10px}.part{display:flex;justify-content:space-between;gap:12px;padding:13px;border-radius:12px;background:#101b2f;border:1px solid var(--line)}.part span{color:#aebdd4}.part b{white-space:nowrap}.calc{margin-top:18px;border-top:1px solid var(--line);padding-top:18px}.calc h3{margin:0 0 10px}.check{display:grid;grid-template-columns:1fr 1fr;gap:8px}.check label{display:flex;gap:9px;align-items:center;background:#0f192b;padding:10px 12px;border-radius:10px;color:#c6d2e5}.sum{margin-top:12px;padding:14px;border-radius:12px;background:#0b251a;border:1px solid #1e6944;display:flex;justify-content:space-between}.sum b{color:var(--good);font-size:20px}.foot{color:#64738d;text-align:center;font-size:12px;margin-top:28px}
+@media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}.top{align-items:flex-start;flex-direction:column}.toolbar{grid-template-columns:1fr}}
+@media(max-width:560px){.grid{grid-template-columns:1fr}.parts,.check{grid-template-columns:1fr}.wrap{padding:24px 14px 50px}.brand h1{letter-spacing:-1px}}
+.header-tools{display:flex;align-items:center;gap:12px}.rpm{width:96px;height:62px;flex:0 0 auto;overflow:hidden}.rpm svg{display:block;width:100%;height:100%;overflow:visible}.rpm-track,.rpm-redline{fill:none;stroke-width:4;stroke-linecap:round}.rpm-track{stroke:var(--line)}.rpm-redline{stroke:#e05b69}.rpm-ticks{fill:none;stroke:var(--muted);stroke-width:1.5;stroke-linecap:round}.rpm-needle{stroke:var(--accent);stroke-width:2.5;stroke-linecap:round;transform-box:view-box;transform-origin:56px 58px;transform:rotate(-55deg)}.rpm-hub{fill:var(--accent)}.rpm-label{fill:var(--muted);font:8px Inter,system-ui,sans-serif;text-anchor:middle}#rpmGauge.revving .rpm-needle{animation:rpm-rev .85s cubic-bezier(.2,.8,.25,1)}
+@keyframes rpm-rev{0%{transform:rotate(-55deg)}40%{transform:rotate(62deg)}65%{transform:rotate(45deg)}100%{transform:rotate(0)}}
+@media(max-width:850px){.header-tools{margin-top:10px}}
+@media(prefers-reduced-motion:reduce){#rpmGauge.revving .rpm-needle{animation:none;transform:rotate(0)}}
+.search-wrap{position:relative;min-width:0}.search-wrap svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:18px;height:18px;fill:none;stroke:var(--muted);stroke-width:2;pointer-events:none}.search{padding-left:44px}
+.card:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.price{display:flex;flex-direction:column;gap:4px;margin-top:15px}.price small{font-size:10px;line-height:1.2;font-weight:700;text-transform:uppercase;color:var(--muted)}.price strong{font-size:25px;line-height:1.15;font-variant-numeric:tabular-nums}
+.parts-title,.calc h3{margin:0 0 10px;font-size:15px}.sum{position:sticky;bottom:0;z-index:2;background:var(--panel);box-shadow:0 -8px 20px #0004}
+:root{--bg:#050b16;--panel:#0b1830;--panel2:#112541;--text:#f2f7ff;--muted:#8fa7c5;--accent:#00c8f0;--accent2:#168fc7;--line:#203a5c;--good:#00d68f}
+body{background:radial-gradient(circle,#7894b31a .8px,transparent .9px) 0 0/36px 36px,linear-gradient(135deg,#08162c,#030712 75%)}
+.brand{padding-left:0}.brand:before{content:none}.brand h1{font-size:26px;line-height:1.1;letter-spacing:0}.brand p{margin-top:5px;font-size:12px}
+.pill{background:#10243f;color:#8fd8ee;border-color:#1c4568}
+.search,.select{background:#09152a;border-color:#1d3959;color:var(--text)}.search:focus,.select:focus{border-color:var(--accent);box-shadow:0 0 0 3px #00c8f022}
+.stat{background:#10213a;border-color:#203958}
+.card{background:linear-gradient(155deg,#102340,#0b1930);border-color:#193756}.card:hover{border-color:#087b9e;box-shadow:0 8px 20px #0005}.name{font-size:15px}.sub{font-size:11px}.price strong{font-size:20px}.arrow{color:var(--accent)}
+.search-wrap svg{stroke:var(--muted)}.card:focus-visible{outline-color:var(--accent)}
+.box{background:#0a172b;border-color:#21476a}.boxhead{background:#0a172bf2}.boxhead h2{font-size:23px}.close{background:#122949;color:var(--text)}
+.full{background:linear-gradient(110deg,#075280,#0d3150);border-color:#087fa6}.full span{color:#b5e7f1}.part{background:#101f37;border-color:#1d3959}.part span{color:#aebdd4}.check label{background:#101f37;color:#c6d2e5}.check input{accent-color:var(--accent)}.check label:has(input:checked){background:#112541;border-color:var(--accent)}.sum{background:#081e2a;border-color:#087c86}.sum b{color:var(--good)}.foot{color:#8297b2}
+:root{--bg:#070b14;--panel:#0e1627;--panel2:#121d32;--text:#f4f7fb;--muted:#8ea0bd;--accent:#4c8dff;--accent2:#7c4dff;--line:#22304a;--good:#45d483}
+body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:radial-gradient(1000px 600px at 20% -10%,#173263 0,transparent 55%),radial-gradient(900px 500px at 100% 0,#261d57 0,transparent 50%),var(--bg)}
+.wrap{max-width:1240px;margin:auto;padding:34px 20px 70px;background:transparent;border:0;border-radius:0;box-shadow:none}
+.top{display:flex;justify-content:space-between;gap:20px;align-items:flex-end;margin-bottom:26px}.brand{padding-left:0}.brand:before{content:none}.brand h1{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:clamp(32px,5vw,58px);line-height:.95;margin:0;letter-spacing:-2px}.brand h1 span{color:var(--accent)}.brand p{color:var(--muted);margin:12px 0 0;font-size:14px}
+.pill{border:1px solid var(--line);background:#0b1220cc;padding:9px 13px;border-radius:999px;color:#b7c6de;font-size:13px}
+.toolbar{display:grid;grid-template-columns:1fr 190px;gap:12px;margin:22px 0}.search,.select{width:100%;border:1px solid var(--line);background:#0b1322;color:var(--text);border-radius:14px;padding:15px 16px;outline:none;font-size:15px;min-height:0}.search{padding-left:16px}.search:focus,.select:focus{border-color:var(--accent);box-shadow:0 0 0 3px #4c8dff22}.search-wrap svg{display:none}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}.stat{background:#0d1626;border:1px solid var(--line);border-radius:12px;padding:9px 12px;color:var(--muted);font-size:13px}.stat b{color:var(--text)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{background:linear-gradient(180deg,#101a2d,#0b1322);border:1px solid var(--line);border-radius:18px;padding:17px;cursor:pointer;transition:.18s transform,.18s border-color,.18s box-shadow}.card:hover{transform:translateY(-2px);border-color:#45679c;box-shadow:0 12px 30px #0005}.name{font-weight:800;font-size:18px}.sub{color:var(--muted);font-size:12px;margin-top:4px}.price{display:block;font-size:25px;font-weight:900;margin-top:16px;letter-spacing:-.5px}.price small{display:inline;font-size:12px;color:var(--muted);font-weight:600;text-transform:none}.price strong{font-size:inherit;line-height:normal;font-weight:inherit}.arrow{float:right;color:var(--accent)}
+.box{width:min(760px,100%);max-height:92vh;overflow:auto;background:#0b1322;border:1px solid #2a3b5b;border-radius:22px;box-shadow:0 30px 100px #000a}.boxhead{padding:22px 22px 16px;display:flex;justify-content:space-between;gap:20px;position:sticky;top:0;background:#0b1322f2;backdrop-filter:blur(10px);z-index:2;border-bottom:1px solid var(--line)}.boxhead h2{margin:0;font-size:27px}.close{border:0;background:#17233a;color:white;width:38px;height:38px;border-radius:12px;font-size:22px;cursor:pointer}.content{padding:18px 22px 24px}
+.full{background:linear-gradient(120deg,#153a75,#382a80);border:1px solid #4d70c8;border-radius:17px;padding:17px;margin-bottom:16px}.full span{display:block;color:#c7d6f0;font-size:12px;text-transform:uppercase;letter-spacing:1px}.full strong{font-size:30px}.parts{display:grid;grid-template-columns:1fr 1fr;gap:10px}.part{display:flex;justify-content:space-between;gap:12px;padding:13px;border-radius:12px;background:#101b2f;border:1px solid var(--line)}.part span{color:#aebdd4}.part b{white-space:nowrap}.calc{margin-top:18px;border-top:1px solid var(--line);padding-top:18px}.calc h3{margin:0 0 10px}.check{display:grid;grid-template-columns:1fr 1fr;gap:8px}.check label{display:flex;gap:9px;align-items:center;background:#0f192b;padding:10px 12px;border:0;border-radius:10px;color:#c6d2e5}.check input{accent-color:var(--accent)}.check label:has(input:checked){background:#121d32}.sum{position:static;z-index:auto;box-shadow:none;margin-top:12px;padding:14px;border-radius:12px;background:#0b251a;border:1px solid #1e6944;display:flex;justify-content:space-between}.sum b{color:var(--good);font-size:20px}.foot{color:#64738d;text-align:center;font-size:12px;margin-top:28px}
+@media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}.top{align-items:flex-start;flex-direction:column}.toolbar{grid-template-columns:1fr}}
+@media(max-width:560px){.grid{grid-template-columns:1fr}.parts,.check{grid-template-columns:1fr}.wrap{padding:24px 14px 50px}.brand h1{letter-spacing:-1px}}
+.grid{grid-auto-rows:1fr}
+.card{display:flex;flex-direction:column;min-height:142px}
+.price{display:flex;flex-direction:column;align-items:flex-start;gap:4px;margin-top:auto;padding-top:14px;font-size:25px;font-weight:900;letter-spacing:0}
+.price small{display:block;font-size:10px;line-height:1.2;color:var(--muted);font-weight:700}
+.price strong{font-size:27px;line-height:1.1;font-weight:900;color:var(--text)}
+.card:hover .price strong{color:var(--accent)}
+.toolbar{margin-top:28px}
+.full{background:linear-gradient(120deg,#153a75,#2459a3);border-color:#4c8dff}
+.check input{accent-color:var(--accent)}
+.check label:has(input:checked){background:#132846;box-shadow:inset 0 0 0 1px #4c8dff}
+</style>
+</head><body><main class="wrap"><div class="top"><div class="brand"><h1>BOBEK <span>CUSTOMS</span></h1><p>Wirtualny cennik tuningu pojazdów</p></div><div class="pill">⚡ Szybkie wyszukiwanie</div></div>
+<div class="toolbar"><label class="search-wrap"><svg aria-hidden="true" viewBox="0 0 24 24" focusable="false"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg><input id="q" class="search" aria-label="Szukaj pojazdu" placeholder="Wpisz model auta, np. Sultan RS..." autofocus></label><select id="sort" class="select"><option value="name">Nazwa A–Z</option><option value="cheap">Bobek Customs: najtaniej</option><option value="exp">Bobek Customs: najdrożej</option></select></div>
+<div class="stats"><div class="stat">Pojazdów: <b id="count"></b></div><div class="stat">Kliknij pojazd, aby zobaczyć <b>pełny cennik</b></div></div><section id="grid" class="grid"></section><div id="empty" class="empty">Brak pojazdu o takiej nazwie.</div><div class="foot">Cennik Bobek Customs • dane na podstawie przesłanego arkusza</div></main>
+<div id="modal" class="modal"><div class="box"><div class="boxhead"><div><div class="sub">CENNIK POJAZDU</div><h2 id="mname"></h2></div><button class="close" id="close">×</button></div><div class="content"><div class="full"><span>Full Tuning</span><strong id="mfull"></strong></div><h3 class="parts-title">Cennik części</h3><div id="parts" class="parts"></div><div class="calc"><h3>Wybierz części do kalkulacji</h3><div id="checks" class="check"></div><div class="sum"><span>Suma wybranych części</span><b id="sum">0 $</b></div></div></div></div></div>
+<script>
+const raw = `
+10F|21000000
+Adder|17500000
+Alpha|4300000
+Autarch|26000000
+Baller Sport|545000
+Buccaneer Lowrider|2000000
+Bestia GTS|2683000
+Banshee|500000
+Banshee 900r|14000000
+Bf Injection|500000
+Bifta|400000
+Brawler|3000000
+Brioso300|1536462
+Brioso300 WideBody|3900000
+Brioso R/A|500000
+Btype|595000
+Btype Hotrood|1150000
+Btype Luxe|462000
+Blazer|1000000
+Blazer Custom|2500000
+Buccaneer|618000
+Burrito Customs|500000
+Buffalo|3000000
+Buffalo S|7000000
+benson|3000000
+Comet CUSTOM|6000000
+Contender|9870000
+Cyclone|19500000
+Chino Lowrider|1500000
+Caracara|12250000
+Carbonizzare|4953000
+Cavalcade|750000
+Cavalcade XL|17500000
+Casco|32000000
+Comet 5|13000000
+Comet s2|1184000
+Comet Sr|13000000
+Comet Drift|3300000
+Coquette|1450000
+Cypher|2500000
+Calico|945000
+Dominator|2350000
+Desert Raid|22600000
+Dominator ASP|942500
+Dominator GTT|634000
+Dominator GTX|6500000
+Dubsta 6x6|66666666
+Deviant|7000000
+Drafter|1500000
+Draugur|30000000
+Dubsta Luxury|1500000
+Dukes|580000
+Dune Buggy|1500000
+elegy retro|6000000
+elegy rh8|4000000
+Emerus|8000000
+everon|14835000
+Entity XF|12500000
+Euros|1234567
+Furia|4000000
+Faction|1300000
+Faction Donk|4120000
+Feltzer|9500000
+Freecrawler|11000000
+FCR1000|2500000
+Furore GT|435000
+Futo drift|1080808
+Gang Burrito|500000
+Glendale Lowrider|2850000
+Gauntlet|380000
+Ganuntlet classic|800000
+GUARDIAN|18000000
+Gauntlet Hellfire|6411000
+Granger|350000
+GT 500|28000000
+Growler|2489644
+Hakouchu Drag (motocykl)|16000000
+Helion|16000000
+Hermes|3500000
+hustler|2800000
+Huntley S|4000000
+Itali GTB|4158624
+Itali GTB CUSTOM|13000000
+Itali rsx|16000000
+Innovation|13000000
+Itali GTO|20000000
+Impaler ZS|1345000
+Impaler LX|485000
+Imorgon|1000000
+Issi Modern|6150000
+Issi Classic|2000000
+Jester|7500000
+Jester Classic|4500000
+Journey|350000
+Jester rr|3000000
+Jugular|17500000
+Kreiger|12000000
+Kamacho|5458796
+Kanjo SJ|2500000
+Komoda|15000000
+Kuruma|3480000
+LM87|80000000
+Locust|5993527
+Lynx|650000
+Mamba|23000000
+Massacro (Racecar)|730000
+Mesa Trail|750000
+Monroe|615000
+Minivan Lowrider|8000000
+Moonbeam Lowrider|2250000
+Moonbeam|750000
+MoonBeam Rider|390000
+Mule 3|5000000
+Nero|32000000
+Neon|19000000
+Neo|1500000
+Nebula|350000
+Nightshade|5000000
+Novak|18000000
+Outlaw|1800000
+Obey 9F Cabrio|4500000
+Obey 9F|4000000
+Omnis|5800000
+Osiris|14000000
+penetrator|8000000
+Previon|3000000
+Primo Lowrider|1000000
+Peyote Lowrider|1500000
+Paragon|3000000
+Pariah|11000000
+Patriot|3000000
+Patriot Limo|5000000
+Peyote 2|2250000
+Postlude|2700000
+Rhinehart|6800000
+RT 3000|900000
+Raiden|2500000
+Riqta|22000000
+remus|10000000
+Reever|10000000
+Rebel|450000
+Reaper|14500000
+Rebla GTs|2000000
+Retinue MK II|850000
+Ruiner ZZ8|6150000
+SMZ722|150000000
+Schafter V12|11750000
+Sabre GT|1220000
+Sabre GT Lowrider|6544000
+Sabre Turbo|1045000
+Slamvan2|400000
+Schlagen|14750000
+sc1|10000000
+Shinobi|16000000
+Stretch|2300000
+Swinger|14500000
+Spectre|3835000
+SPECTER CUSTOM|8000000
+Streiter|8700000
+Slamvan Lowrider|2400000
+Sugoi|2000000
+Superd Diamond|350000
+Sultan rs classic|6000000
+Sultan RS|16000000
+Sultan Classic|800000
+Stafford|18000000
+Sentinel classic|4800000
+Sentinel Classic Widebody|11000000
+slamvan|350000
+Tyrus|17000000
+Thrax|20000000
+Tailgater S|10000000
+Tampa Drift|6500000
+Trophy Truck|21000000
+Torero XO|16000000
+Tornado Lowrider|1750000
+Tempesta|3800000
+Tropos|5000000
+Tulip|540000
+Turismo|14000000
+T20|15000000
+Toros|22000000
+Vagrant|1200000
+Vigero ZX|7560000
+Virgo Lowride|2150000
+Virgo classic|1850000
+Voodoo Lowrider|750000
+Vstr|12000000
+Veto Modern|350000
+Warrener HKR|1237000
+Weevil Custom|4500000
+Windsor|500000
+XLS|650000
+Yosemite drifft|1500000
+Youga Customs|5800000
+Yosemite|1500000
+Yosemite2|400000
+yosemite3|350000
+Zion Classic|1350000
+Zorrusso|3500000
+Zentorno|12000000
+Zr350|647000
+z-type|100000000
+z190|38000000`;
+const cars=raw.trim().split('\n').map(x=>{const [name,s]=x.split('|');const salon=+s;return{name,salon,full:Math.round(salon*.7),engine:Math.round(salon*.21),gear:Math.round(salon*.14),turbo:Math.round(salon*.175),susp:Math.round(salon*.105),brakes:Math.round(salon*.14),armor:Math.round(salon*.14)}});
+const fmt=n=>new Intl.NumberFormat('pl-PL').format(n)+' $';
+const grid=document.querySelector('#grid'),q=document.querySelector('#q'),sort=document.querySelector('#sort'),empty=document.querySelector('#empty');
+function render(){let a=cars.filter(c=>c.name.toLowerCase().includes(q.value.toLowerCase().trim())); if(sort.value==='name')a.sort((x,y)=>x.name.localeCompare(y.name,'pl'));if(sort.value==='cheap')a.sort((x,y)=>x.full-y.full);if(sort.value==='exp')a.sort((x,y)=>y.full-x.full);document.querySelector('#count').textContent=a.length;grid.innerHTML=a.map(c=>`<article class="card" data-n="${encodeURIComponent(c.name)}"><div class="name">${c.name}<span class="arrow">↗</span></div><div class="sub">Cena salonowa: ${fmt(c.salon)}</div><div class="price"><small>FULL TUNING</small><strong>${fmt(c.full)}</strong></div></article>`).join('');empty.style.display=a.length?'none':'block';}
+q.oninput=render;sort.onchange=render;render();
+const modal=document.querySelector('#modal');function openCar(name){const c=cars.find(x=>x.name===name);document.querySelector('#mname').textContent=c.name;document.querySelector('#mfull').textContent=fmt(c.full);const p=[['Silnik',c.engine],['Skrzynia biegów',c.gear],['Turbo',c.turbo],['Zawieszenie',c.susp],['Hamulce',c.brakes],['Pancerz',c.armor]];document.querySelector('#parts').innerHTML=p.map(([n,v])=>`<div class="part"><span>${n}</span><b>${fmt(v)}</b></div>`).join('');document.querySelector('#checks').innerHTML=p.map(([n,v],i)=>`<label><input type="checkbox" data-v="${v}"> ${n}</label>`).join('');document.querySelector('#sum').textContent='0 $';document.querySelectorAll('#checks input').forEach(el=>el.onchange=()=>{let s=0;document.querySelectorAll('#checks input:checked').forEach(x=>s+=+x.dataset.v);document.querySelector('#sum').textContent=fmt(s)});modal.classList.add('on')}
+grid.onclick=e=>{const card=e.target.closest('.card');if(card)openCar(decodeURIComponent(card.dataset.n))};document.querySelector('#close').onclick=()=>modal.classList.remove('on');modal.onclick=e=>{if(e.target===modal)modal.classList.remove('on')};document.onkeydown=e=>{if(e.key==='Escape')modal.classList.remove('on')};
+</script></body></html>
